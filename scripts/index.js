@@ -17,9 +17,12 @@ function Input(name, value){
 let showList = () => {
     if (localStorage.getItem("infoInput")) {
         let output = JSON.parse(localStorage.getItem("infoInput"))
-        for (key in output) {
-            let li = document.createElement("li");
-            li.innerText = `${key}=${output[key]}`;
+        console.log(output);
+        for (el of output){
+            let li = document.createElement('li');
+            for(key in el){
+                li.innerText+=`${el[key]}`
+            }
             ul.appendChild(li);
         }
     } else {
@@ -54,12 +57,13 @@ btnAdd.onclick = () => {
     if (check()) {
         nonePar.remove();
         incorrectPar.remove();
-        let infoInput = JSON.parse(localStorage.getItem("infoInput")) || {};
+        let infoInput = JSON.parse(localStorage.getItem("infoInput")) || [];
         let [name, value] = input.value.split("=");
-        infoInput[name] = value;
+     infoInput.push( new Input(name, value));
         let li = document.createElement('li');
         li.innerText = `${name}=${value}`
         ul.appendChild(li);
+        console.log(infoInput);
         localStorage.setItem("infoInput", JSON.stringify(infoInput));
         input.value = '';
     }
