@@ -1,30 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="style/index.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <link rel="stylesheet" href="style/index.css">
+  <link rel="stylesheet" href="style/styleTablet.css">
+  <link rel="stylesheet" href="style/styleMobile.css">
 </head>
 <body>
-<div class="wrapper">
-    <h1>Test</h1>
-    <div id="addValue">
-        <label for="addValueInp">Name/Value Pair</label>
-        <input type="text" placeholder="Name=Value" id="addValueInp">
-        <button>Add</button>
+<div class="page-wrapper"><div class="wrapper">
+  <h1>Test</h1>
+  <form action="" id="addValue">
+    <label for="addValueInp" class="p-ul">Name/Value Pair</label>
+    <div class="inp-btn">
+      <input type="text" placeholder="Name=Value" id="addValueInp">
+      <button>Add</button>
     </div>
-    <div id="values">
- <ul id="output"></ul>
-        <button id="NameSort">Sort By Name</button>
-        <button id="ValueSort" >Sort by Value</button>
-        <button id="delete">Delete</button>
+  </form>
+  <div id="values">
+    <div id="listDiv">
+      <p class="p-ul">Name/Value Pair list</p>
+      <ul id="output"></ul>
     </div>
 
+    <div id="buttonsDiv">
+      <button id="NameSort">Sort By Name</button>
+      <button id="ValueSort">Sort by Value</button>
+      <button id="delete">Delete</button>
+    </div>
+  </div>
 
-</div>
 
-
+</div></div>
 
 
 <script src="scripts/index.js"></script>
