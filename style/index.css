@@ -25,11 +25,11 @@ body{
      display: flex;
      align-items: center;
 }
-.p-ul{
+.p-sel{
      display: block;
      opacity: 70%;
 }
-ul{
+select{
      list-style: none;
      margin: 0;
      padding: 0;
