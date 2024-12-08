@@ -8,9 +8,11 @@ let nonePar = document.createElement('p');
 nonePar.innerText = "you haven't added anything yet";
 let incorrectPar = document.createElement('p');
 incorrectPar.innerText = "incorrect input format";
+let addBtn = document.querySelector("button")
 
 
 let checkAndTrim = () => {
+    console.log("chek");
     input.value = input.value.trim();
     if (input.value.includes("=")) {
         let [name, value] = input.value.split('=');
@@ -19,14 +21,10 @@ let checkAndTrim = () => {
         if (!!(name.match(/[^a-zA-Z0-9а-яА-ЯіІїЇ]+/g) || !!(value.match(/[^a-zA-Z0-9а-яА-ЯіІїЇ]+/g)))) {
             form.appendChild(incorrectPar);
             return false
-        }
-        else  if (name.length<=0 || value.length<=0)
-        {
+        } else if (name.length <= 0 || value.length <= 0) {
             form.appendChild(incorrectPar);
             return false
-        }
-
-        else {
+        } else {
             return [name, value]
         }
     } else {
@@ -112,9 +110,11 @@ showList(outputList);
 //    return selectedItems = Array.from(select.selectedOptions.namedItem());
 // }
 
+
 deleteBtn.onclick = () => {
     if (localStorage.getItem('outputList')) {
         let outputList = JSON.parse(localStorage.getItem('outputList'))
+
         let selected = Array.from(select.selectedOptions);
         // console.log(outputList);
         // selected.forEach((item)=> console.log(item.id))
@@ -125,10 +125,6 @@ deleteBtn.onclick = () => {
                 console.log(outputList[i].id, +selectedItem.id)
 
                 if (+selectedItem.value === outputList[i].id) {
-                    // console.log(outputList[i].id);
-                    // console.log(outputList);
-                    // console.log(outputList[i]);
-                    //  console.log(id);
                     console.log(document.getElementById(`${id}`));
                     document.getElementById(`${outputList[i].id}`).remove();
                     outputList.splice(i, 1);
@@ -184,4 +180,13 @@ nameSortBtn.onclick = () => {
 
     }
 }
+
+document.addEventListener('keyup', event => {
+    let isActive = document.activeElement.tagName.toLowerCase()=="input";
+    if (event.code == 'Enter' && !isActive ) {
+        addBtn.click()
+
+    }
+   console.log(isActive);
+})
 
