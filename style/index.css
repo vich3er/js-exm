@@ -3,6 +3,9 @@
      padding: 0;
      box-sizing: border-box;
 }
+
+
+
 .inp-btn{
      display: flex;
      justify-content: space-between;

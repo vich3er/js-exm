@@ -10,9 +10,9 @@ let incorrectPar = document.createElement('p');
 incorrectPar.innerText = "incorrect input format";
 let addBtn = document.querySelector("button")
 
-
+// перевірка чи вілідний ввід та прибирання зайвих відступів
 let checkAndTrim = () => {
-    console.log("chek");
+
     input.value = input.value.trim();
     if (input.value.includes("=")) {
         let [name, value] = input.value.split('=');
@@ -33,18 +33,19 @@ let checkAndTrim = () => {
     }
 }
 
+// конструктор об'єкта який вводить користувач
 function Input(name, value) {
-    this.name = name.trim();
-    this.value = value.trim();
-    this.id = inpId()
+    this.name = name
+    this.value = value
+    this.id = inpId() // для коректного видалення
 
 
 }
 
 let inpId = id()
 
+// функція яка створює айді об'єкту
 function id() {
-
     let outputList = JSON.parse(localStorage.getItem("outputList")) || []
     let start = outputList[outputList.length - 1]?.id || 0;
     return function () {
@@ -53,6 +54,7 @@ function id() {
 
 }
 
+// додає об'єкт до списку і локального сховища якщо ввід коректний
 form.onsubmit = function (e) {
     e.preventDefault();
     if (checkAndTrim()) {
@@ -70,12 +72,12 @@ form.onsubmit = function (e) {
         localStorage.setItem("outputList", JSON.stringify(outputList));
         select.appendChild(option);
         input.value = '';
-        console.log(input.value);
+
     }
-    // input.value = '';
+
 
 }
-
+// вииводить список введених пар
 let showList = (outputList) => {
     if (outputList.length > 0) {
         select.innerHTML = "";
@@ -98,44 +100,31 @@ let showList = (outputList) => {
     }
 }
 
-
+// виводить список введених пар при завантаженні сторінки
 let outputList = JSON.parse(localStorage.getItem("outputList")) || []
 showList(outputList);
-
-// select.onchange = () => {
-//     let selectedItems = Array.from(select.value);
-// }
-
-// let selectedItems = select.onchange=()=>{
-//    return selectedItems = Array.from(select.selectedOptions.namedItem());
-// }
-
-
+// видаляє обрані елементи
 deleteBtn.onclick = () => {
     if (localStorage.getItem('outputList')) {
         let outputList = JSON.parse(localStorage.getItem('outputList'))
-
         let selected = Array.from(select.selectedOptions);
-        // console.log(outputList);
-        // selected.forEach((item)=> console.log(item.id))
-        console.log(selected);
+
         for (selectedItem of selected) {
-            console.log(selectedItem.id);
+
             for (let i = 0; i < outputList.length; i++) {
-                console.log(outputList[i].id, +selectedItem.id)
+
 
                 if (+selectedItem.value === outputList[i].id) {
-                    console.log(document.getElementById(`${id}`));
+
                     document.getElementById(`${outputList[i].id}`).remove();
                     outputList.splice(i, 1);
-                    console.log(outputList);
 
 
                 }
             }
         }
         localStorage.setItem("outputList", JSON.stringify(outputList))
-        //console.log(s);
+
 
         if (outputList.length == 0) {
             localStorage.removeItem("outputList")
@@ -151,42 +140,41 @@ deleteBtn.onclick = () => {
 
 }
 
-
+// сортування за алфавітом по value
 valueSortBtn.onclick = () => {
     if (localStorage.getItem("outputList")) {
         let outputList = JSON.parse(localStorage.getItem("outputList"));
-        let sortByValue = outputList.sort((a, b) => {
+        outputList.sort((a, b) => {
             if (a.value > b.value) return 1;
             if (a.value < b.value) return -1;
             else return 0;
         })
-        // console.log(sortByValue);
+
         showList(outputList);
 
     }
 
 }
-
+// сортування за алфавітом по name
 nameSortBtn.onclick = () => {
     if (localStorage.getItem("outputList")) {
         let outputList = JSON.parse(localStorage.getItem("outputList"));
-        let sortByValue = outputList.sort((a, b) => {
+        outputList.sort((a, b) => {
             if (a.name > b.name) return 1;
             if (a.name < b.name) return -1;
             else return 0;
         })
-        console.log(sortByValue);
         showList(outputList);
 
     }
 }
-
+// додавання об'єкту в список через ентрер при відсутності фокусі на інпуті
 document.addEventListener('keyup', event => {
-    let isActive = document.activeElement.tagName.toLowerCase()=="input";
-    if (event.code == 'Enter' && !isActive ) {
+    let isActive = document.activeElement.tagName == "INPUT";
+    if (event.code == 'Enter' && !isActive) {
         addBtn.click()
 
     }
-   console.log(isActive);
+
 })
 
