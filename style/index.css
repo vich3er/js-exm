@@ -4,7 +4,19 @@
      box-sizing: border-box;
 }
 
+ .selected{
+      background: #d5ba60;
 
+ }
+
+ .selected::before{
+      content: "(selected) ";
+
+ }
+
+ option{
+      padding-left: 20px;
+ }
 
 .inp-btn{
      display: flex;
@@ -42,13 +54,7 @@ select{
      height: 300px;
      overflow-y: scroll;
 }
-/*.page-wrapper{*/
-/*     display: flex;*/
-/*     align-items: center;*/
-/*     justify-content: center;*/
-/*     height: 100%;*/
-/*     width: 100%;*/
-/*}*/
+
 .wrapper{
      background: #f8f8f3;
      width: 930px;

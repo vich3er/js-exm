@@ -10,6 +10,8 @@ let incorrectPar = document.createElement('p');
 incorrectPar.innerText = "incorrect input format";
 let addBtn = document.querySelector("button")
 
+
+
 // перевірка чи вілідний ввід та прибирання зайвих відступів
 let checkAndTrim = () => {
 
@@ -107,7 +109,8 @@ showList(outputList);
 deleteBtn.onclick = () => {
     if (localStorage.getItem('outputList')) {
         let outputList = JSON.parse(localStorage.getItem('outputList'))
-        let selected = Array.from(select.selectedOptions);
+            // let selected = Array.from(select.selectedOptions);
+let selected = Array.from(select.getElementsByClassName("selected"))
 
         for (selectedItem of selected) {
 
@@ -177,4 +180,16 @@ document.addEventListener('keyup', event => {
     }
 
 })
+
+// вибір елементу по кліку
+ select.addEventListener('mousedown',e => {
+
+     if (e.target.tagName=="OPTION")
+     {
+
+         let opt = e.target;
+         console.log(opt)
+         opt.classList.contains("selected") ? opt.classList.remove("selected") : opt.classList.add("selected")
+     }
+ })
 
